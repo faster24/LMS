@@ -25,7 +25,7 @@ function NavBar() {
   return (
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand text-primary" href="#">
+        <a class="navbar-brand text-primary" href="/">
           MK
         </a>
         <button

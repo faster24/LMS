@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://lms-api-io.herokuapp.com/api/v1/auth";
+const API_URL = "http://localhost:8000/api/v1/auth";
 
 const register = ( firstname, lastname, email, password ) => {
   return axios

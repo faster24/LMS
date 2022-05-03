@@ -1,12 +1,12 @@
 import { React, useState, useEffect } from "react";
 import AuthServices from "../services/auth.services";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 import CourseServices from "../services/course.services";
 
 function Course({ course }) {
   const [currentUserID, setCurrentUserID] = useState("");
- 
+
   useEffect(() => {
     try {
       const user = AuthServices.getCurrentUser();
@@ -34,13 +34,12 @@ function Course({ course }) {
             swal({
               title: "Launch Link",
               text: `${res.data}`,
-              icon: "success", 
-              button: "OK"
+              icon: "success",
+              button: "OK",
             });
           }
         }
       );
-      
     } catch (error) {
       console.log(error.message);
     }
@@ -48,7 +47,7 @@ function Course({ course }) {
 
   return (
     <div class="col mb-5">
-      <div class="card h-120">
+      <div class="card">
         <img
           class="card-img-top"
           src={require("../asset/img/pexels-bulb.jpg")}
@@ -57,13 +56,15 @@ function Course({ course }) {
           height="140"
         />
 
-        <div class="card-body p-4">
+        <div class="p-3">
           <h6 class="fs-6 fw-bold fst-italic">Course Title </h6>
 
-          <p class="fs-6 fw-lighter">{course.title}</p>
+          <div class="w-100 pt-2">
+            <p class="fs-6 fw-lighter ">{course.title}</p>
+          </div>
         </div>
 
-        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="p-2 pt-0 border-top-0 bg-transparent">
           {currentUserID ? (
             <form onSubmit={handleSubmit}>
               <input type="hidden" id="userId" value={currentUserID} />
@@ -78,7 +79,11 @@ function Course({ course }) {
               </button>
             </form>
           ) : (
-            <p class="fs- fw-bold text-center">Please login to take course</p>
+            <div className="p-2 pt-0 border-top-0">
+              <p class="fs-6 fw-bold text-center">
+                Please login to take course
+              </p>
+            </div>
           )}
         </div>
       </div>

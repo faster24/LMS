@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import AuthService from "../services/auth.services";
-import NavBar from "./NavBar";
+import NavBar from  "./NavBar";
 import "../asset/css/auth.css";
+import swal from 'sweetalert';
 
 function Register() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confrimPassword, setConfimPassword] = useState("");
-  const [alert, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,11 +16,11 @@ function Register() {
       await AuthService.register(firstname, lastname, email, password).then(
         (response) => {
           // check for token and user already exists with 200
-          const alert = response.message;
+          swal({
+            title: `${response.message}`,
+            icon: "success"
+          });
 
-          if (response.message) setMessage(alert);
-
-          console.log(alert);
           console.log(response);
         }
       );
@@ -30,7 +29,11 @@ function Register() {
     }
   };
   return (
-    <section class="ftco-section">
+    <div>
+
+      <NavBar/>
+
+      <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-12 col-lg-10">
@@ -112,7 +115,6 @@ function Register() {
                       class="form-control"
                       placeholder="Comfirm Password"
                       id="comfirmPassword"
-                      onChange={(e) => setConfimPassword(e.target.value)}
                       required
                     />
                   </div>
@@ -121,7 +123,7 @@ function Register() {
                       type="submit"
                       class="form-control btn btn-primary submit px-3"
                     >
-                      Sign In
+                      Sign Up
                     </button>
                   </div>
                 </form>
@@ -131,6 +133,8 @@ function Register() {
         </div>
       </div>
     </section>
+      </div>
+
   );
 }
 

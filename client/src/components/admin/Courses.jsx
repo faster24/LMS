@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import courseServices from "../../services/course.services";
-
+import swal from "sweetalert";
 
 function Courses() {
   const [courseId, setCourseId] = useState("");
@@ -11,10 +11,16 @@ function Courses() {
 
     try {
       await courseServices.createCourse(courseId, file).then((response) => {
-        console.log(response.message);
+        swal({
+          title: `${response.data.message}`,
+          icon: "success"
+        });
       });
     } catch (error) {
-      console.log(error.message);
+      swal({
+        title: 'Sorry, Something went wrong!',
+        icon: "warning"
+      });
     }
   };
 
